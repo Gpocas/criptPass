@@ -19,8 +19,8 @@ def EncryptedApp():
     layout = [
     [sg.Text('Entre com a senha:  '), sg.InputText(key='-PasswordText-',size=(20,1))],
     [sg.Text('Senha Criptografada:')],
-    [sg.Multiline(key='-PasswordEncrypt-',size=(30, 5), disabled=True)],
-    [ sg.Button('Encrypted'),sg.Button('Copy'), sg.Button('Back'), sg.Exit(), ]
+    [sg.Multiline(key='-PasswordEncrypt-',size=(35, 6), disabled=True)],
+    [ sg.Button('Encrypted'),sg.Button('Copy'), sg.Button('Clear'), sg.Button('Back'), sg.Exit(), ]
         ]
 
     return sg.Window("CriptPass", layout=layout, icon=icone, finalize=True)
@@ -28,12 +28,11 @@ def EncryptedApp():
 
 def DecryptedApp():
 
-    
     layout = [
     [sg.Text('Entre com a senha:       '), sg.InputText(key='-PasswordEncryptFunc-',size=(20,1))],
     [sg.Text('Senha Descriptografada:')], 
-    [sg.Multiline(key='-PasswordDecrypt-',size=(30,5), disabled=True)],
-    [ sg.Button('Decrypted'),sg.Button('Paste'), sg.Button('Back'), sg.Exit()]
+    [sg.Multiline(key='-PasswordDecrypt-',size=(35,6), disabled=True)],
+    [ sg.Button('Decrypted'),sg.Button('Paste'),sg.Button('Clear'), sg.Button('Back'), sg.Exit()]
         ]
 
     return sg.Window("CriptPass", layout=layout, icon=icone, finalize=True)
@@ -101,3 +100,12 @@ while True:
         window['-PasswordEncryptFunc-'].update(text_copy)
         password_decrypted = decrypt_pass(text_copy)
         window['-PasswordDecrypt-'].update(password_decrypted)
+        
+    if window == window_encrypt and event == 'Clear':
+        window['-PasswordText-'].update('')
+        window['-PasswordEncrypt-'].update('')
+        
+    
+    if window == window_decrypt and event == 'Clear':
+        window['-PasswordEncryptFunc-'].update('')
+        window['-PasswordDecrypt-'].update('')
